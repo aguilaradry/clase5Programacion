@@ -17,14 +17,10 @@ jobs:
     - name: Upgrade pip, setuptools, and wheel
       run: |
         python -m pip install --upgrade pip setuptools wheel
-    - name: Install system dependencies
+    - name: Install nbqa and pylint
       run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential     
-    - name: Install jupyter-linter
-      run: |
-        pip install jupyter-linter
+        pip install nbqa pylint
 
-    - name: Run jupyter-linter on notebooks
+    - name: Run nbqa with pylint on notebooks
       run: |
-        jupyter-linter $(git ls-files '*.ipynb')
+        nbqa pylint $(git ls-files '*.ipynb')
